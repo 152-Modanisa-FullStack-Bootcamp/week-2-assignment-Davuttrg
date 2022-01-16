@@ -1,28 +1,68 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="container">
+      <div class="header">
+        <div class="logo">
+          <img src="../src/assets/logo.png" alt="" />
+          <router-link to="/">Home</router-link>
+        </div>
+        <div class="favorite-button" @click="navigateFavorite">Favorites</div>
+      </div>
+      <router-view> </router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  methods: {
+    navigateFavorite() {
+      this.$router.push("/favorites/bootcamp");
+    },
+  },
+};
 </script>
 
 <style>
+body {
+  margin: 0;
+}
+.container > .header {
+  height: 70px;
+  box-shadow: 0px 3px 14px -6px rgb(0 0 0 / 75%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+.container > .header > .logo {
+  display: flex;
+  height: 30px;
+  align-items: center;
+  gap: 20px;
+  font-weight: 600;
+}
+.container > .header > .logo > img {
+  height: 100%;
+}
+.container > .header > .favorite-button {
+  width: 100px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 20px;
+  cursor: pointer;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
 }
 </style>
