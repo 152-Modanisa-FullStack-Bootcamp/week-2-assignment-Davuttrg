@@ -11,7 +11,7 @@
 
 <script>
 import axios from "axios";
-import Video from "../components/video.vue";
+import Video from "../components/Video";
 export default {
   name: "Home",
   components: { Video },

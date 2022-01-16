@@ -10,7 +10,9 @@
     <div class="info">
       <div v-if="diplayMode == 'vertical'">
         <img :src="video.ownerImage" alt="" />
-        <span class="material-icons add-favorites"> favorite_border </span>
+        <span @click="clickFavoriteButton" class="material-icons add-favorites">
+          {{ isFavorited ? "favorite" : "favorite_border" }}
+        </span>
         <div class="texts">
           <div class="title">{{ video.title }}</div>
           <div class="owner">{{ video.ownerName }}</div>
@@ -22,7 +24,9 @@
         </div>
       </div>
       <div v-else>
-        <span class="material-icons add-favorites"> favorite_border </span>
+        <span @click="clickFavoriteButton" class="material-icons add-favorites">
+          {{ isFavorited ? "favorite" : "favorite_border" }}
+        </span>
         <div class="texts">
           <div class="title">{{ video.title }}</div>
           <div class="counts">
@@ -41,17 +45,6 @@
       </div>
     </div>
   </div>
-
-  <!-- // coverImage: "https://raw.githubusercontent.com/modanisa/bootcamp-video-db/main/video-images/1-cover.webp"
-// description: "Learn Vue 3 by in this full course. Vue.js is an open-source model–view–view model front end JavaScript framework for building user interfaces and single-page applications."
-// hoverImage: "https://raw.githubusercontent.com/modanisa/bootcamp-video-db/main/video-images/1-hover.webp"
-// id: 1
-// ownerImage: "https://yt3.ggpht.com/ytc/AKedOLTtJvQ1Vfew91vemeLaLdhjOwGx3tTBLlreK_QUyA=s68-c-k-c0x00ffffff-no-rj"
-// ownerName: "freeCodeCamp.org"
-// publishDateInMonth: 4
-// title: "Vue.js Course for Beginners [2021 Tutorial]"
-// videoAddress: "https://www.youtube.com/watch?v=FXpIoQ_rT_c"
-// viewCount: 254 -->
 </template>
 
 <script>
@@ -61,12 +54,26 @@ export default {
   data() {
     return {
       showedImage: this.video.coverImage,
+      isFavorited: {
+        type: Boolean,
+        default: false,
+      },
     };
   },
   methods: {
     routingWatch() {
       this.$router.push(`/watch?videoId=${this.video.id}`);
     },
+    clickFavoriteButton() {
+      this.isFavorited = !this.isFavorited;
+      this.$store.dispatch("handleFavorites", this.video);
+    },
+  },
+  mounted() {
+    this.isFavorited = this.$store.state.favoriteVideos.some(
+      (item) => item.id == this.video.id
+    );
+    console.log("this.isFavorited :", this.isFavorited);
   },
 };
 </script>

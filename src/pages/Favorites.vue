@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import axios from "axios";
-import Video from "../components/video.vue";
+// import axios from "axios";
+import Video from "../components/Video";
 export default {
   name: "Favorites",
   components: { Video },
@@ -21,10 +21,10 @@ export default {
     };
   },
   async created() {
-    const { data } = await axios.get(
-      "https://my-json-server.typicode.com/modanisa/bootcamp-video-db/videos"
-    );
-    this.videos = data;
+    // const { data } = await axios.get(
+    //   "https://my-json-server.typicode.com/modanisa/bootcamp-video-db/videos"
+    // );
+    this.videos = this.$store.state.favoriteVideos;
   },
 };
 </script>
@@ -35,6 +35,6 @@ export default {
   gap: 20px;
   margin-top: 3rem;
   flex-direction: column;
-   align-items: center;
+  align-items: center;
 }
 </style>

@@ -6,7 +6,9 @@
           <img src="../src/assets/logo.png" alt="" />
           <router-link to="/">Home</router-link>
         </div>
-        <div class="favorite-button" @click="navigateFavorite">Favorites</div>
+        <div class="favorite-button" @click="navigateFavorite">
+          Favorites {{ $store.state.favoriteVideos.length }}
+        </div>
       </div>
       <router-view> </router-view>
     </div>
